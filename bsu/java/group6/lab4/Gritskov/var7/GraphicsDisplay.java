@@ -50,6 +50,18 @@ public class GraphicsDisplay extends JPanel{
 		repaint();
 	}
 	
+	protected Point2D.Double xyToPoint(double x, double y) {
+		double deltaX = x - minX;
+		double deltaY = maxY - y;
+		return new Point2D.Double(deltaX*scale, deltaY*scale);
+	}
+	
+	protected Point2D.Double shiftPoint(Point2D.Double src, double deltaX, double deltaY) {
+			Point2D.Double dest = new Point2D.Double();
+			dest.setLocation(src.getX() + deltaX, src.getY() + deltaY);
+			return dest;
+	}
+	
 	public GraphicsDisplay() {
 		setBackground(Color.WHITE);
 		float[] dash = {10.0f, 10.0f};
