@@ -133,6 +133,47 @@ public class GraphicsDisplay extends JPanel{
 		
 	}
 	
+	protected void paintMarkers(Graphics2D canvas) {
+		canvas.setStroke(markerStroke);
+		
+		for (Double[] point:graphicsData) {
+			Rectangle2D.Double markerRect = new Rectangle2D.Double();
+			Point2D.Double center = xyToPoint(point[0], point[1]);
+			Point2D.Double corner = shiftPoint(center, 5.5, 5.5);
+			markerRect.setFrameFromCenter(center, corner);
+			GeneralPath markerLines = new GeneralPath();
+			markerLines.moveTo(center.getX()-5.5, center.getY()+5.5);
+			markerLines.lineTo(markerLines.getCurrentPoint().getX()+11, markerLines.getCurrentPoint().getY()-11);
+			markerLines.lineTo(markerLines.getCurrentPoint().getX(), markerLines.getCurrentPoint().getY()+11);
+			markerLines.lineTo(markerLines.getCurrentPoint().getX()-11, markerLines.getCurrentPoint().getY()-11);
+			
+			String str = String.valueOf(point[1]);
+			boolean inAscendingOrder = true;
+			Integer firstNum = new Integer(str.charAt(0));
+			for (int i = 1; i < str.length(); i++) {
+				if (str.charAt(i) == '.') {
+					continue;
+				}
+				if (firstNum > new Integer(str.charAt(i)) ) {
+					inAscendingOrder = false;
+					break;
+				}
+				firstNum = new Integer(str.charAt(i));
+			}
+			
+			if (inAscendingOrder) {
+				canvas.setColor(Color.BLUE);
+				canvas.draw(markerRect);
+				canvas.draw(markerLines);
+			}
+			else {
+				canvas.setColor(Color.RED);
+				canvas.draw(markerRect);
+				canvas.draw(markerLines);
+			}	
+		}
+	}
+	
 	public GraphicsDisplay() {
 		setBackground(Color.WHITE);
 		float[] dash = {10.0f, 10.0f};
