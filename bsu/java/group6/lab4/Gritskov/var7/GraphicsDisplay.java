@@ -35,7 +35,10 @@ public class GraphicsDisplay extends JPanel{
 	
 	private Font axisFont;
 	
-	
+	public void showGraphics(Double [][] graphicsData) {
+		this.graphicsData = graphicsData;
+		repaint();
+	}
 	
 	public GraphicsDisplay() {
 		setBackground(Color.WHITE);
