@@ -56,7 +56,26 @@ public class MainFrame extends JFrame {
 		JMenu graphicsMenu = new JMenu("Graphic");
 		menuBar.add(graphicsMenu);
 		
+		Action showAxisAction = new AbstractAction("Show Axis") {
+			public void actionPerformed(ActionEvent event) {
+				display.setShowAxis(showAxisMenuItem.isSelected());
+			}
+		};
+		showAxisMenuItem = new JCheckBoxMenuItem(showAxisAction);
+		graphicsMenu.add(showAxisMenuItem);
+		showAxisMenuItem.setSelected(true);
 		
+		Action showMarkersAction = new AbstractAction("Show markers") {
+				public void actionPerformed(ActionEvent event) {
+					display.setShowMarkers(showMarkersMenuItem.isSelected());
+				}
+		};
+		showMarkersMenuItem = new JCheckBoxMenuItem(showMarkersAction);
+		graphicsMenu.add(showMarkersMenuItem);
+		showMarkersMenuItem.setSelected(false);
+		graphicsMenu.addMenuListener(new GraphicsMenuListener());
+		
+		getContentPane().add(display, BorderLayout.CENTER);
 		
 	}
 	
