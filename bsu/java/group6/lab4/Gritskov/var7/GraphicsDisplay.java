@@ -62,6 +62,22 @@ public class GraphicsDisplay extends JPanel{
 			return dest;
 	}
 	
+	protected void paintGraphics(Graphics2D canvas) {
+		canvas.setStroke(graphicsStroke);
+		canvas.setColor(Color.RED);
+		GeneralPath graphics = new GeneralPath();
+		for (int i = 0; i < graphicsData.length; i++) {
+			Point2D.Double point = xyToPoint(graphicsData[i][0], graphicsData[i][1]);
+			if (i > 0) {
+				graphics.lineTo(point.getX(), point.getY());
+			}
+			else {
+				graphics.moveTo(point.getX(), point.getY());
+			}
+		}
+		canvas.draw(graphics);
+	}
+	
 	public GraphicsDisplay() {
 		setBackground(Color.WHITE);
 		float[] dash = {10.0f, 10.0f};
