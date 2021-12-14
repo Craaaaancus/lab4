@@ -40,6 +40,16 @@ public class GraphicsDisplay extends JPanel{
 		repaint();
 	}
 	
+	public void setShowAxis(boolean showAxis) {
+		this.showAxis = showAxis;
+		repaint();
+	}
+	
+	public void setShowMarkers(boolean showMarkers) {
+		this.showMarkers = showMarkers;
+		repaint();
+	}
+	
 	public GraphicsDisplay() {
 		setBackground(Color.WHITE);
 		float[] dash = {10.0f, 10.0f};
