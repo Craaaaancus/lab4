@@ -79,7 +79,34 @@ public class MainFrame extends JFrame {
 		
 	}
 	
-	
+	protected void openGraphics(File selectedFile) {
+		try {
+			DataInputStream in = new DataInputStream(new FileInputStream(selectedFile));
+			Double[][] graphicsData = new Double[in.available()/(Double.SIZE/8)/2][];
+			int i = 0;
+			while (in.available() > 0) {
+				Double x = in.readDouble();
+				Double y = in.readDouble();	
+				graphicsData[i++] = new Double[] {x,y};
+			}
+			if (graphicsData != null && graphicsData.length > 0) {
+				fileLoaded = true;
+				display.showGraphics(graphicsData);
+			}
+			in.close();
+		}
+		catch(FileNotFoundException ex) {
+			JOptionPane.showMessageDialog(MainFrame.this, "Указанный файл не найден", "Ошибка загрузки данных", 
+					JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		catch(IOException ex) {
+			JOptionPane.showMessageDialog(MainFrame.this, "Ошибка чтения координат точек из файла", "Ошибка загрузки данных", 
+					JOptionPane.WARNING_MESSAGE);
+			return;
+
+		}
+	}
 	
 	public static void main(String[] args) {
 		MainFrame frame = new MainFrame();
