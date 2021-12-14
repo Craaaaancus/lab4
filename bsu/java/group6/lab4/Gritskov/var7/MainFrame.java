@@ -114,5 +114,18 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 	}
 	
-	
+	private class GraphicsMenuListener implements MenuListener{
+
+		public void menuSelected(MenuEvent e) {
+			showAxisMenuItem.setEnabled(fileLoaded);
+			showMarkersMenuItem.setEnabled(fileLoaded);
+		}
+		
+		public void menuDeselected(MenuEvent e) {
+		}
+		
+		public void menuCanceled(MenuEvent e) {
+		}
+
+	}
 }
